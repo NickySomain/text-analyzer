@@ -1,4 +1,5 @@
 import nltk
+import sys
 
 # Скачиваем необходимые ресурсы NLTK
 nltk.download('punkt')
@@ -34,9 +35,34 @@ def count_pos_tags(text):
         'verbs': verbs
     }
 
+def read_file(file_path):
+    """
+    Функция для чтения текста из файла
+    """
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            return file.read()
+    except FileNotFoundError:
+        print(f"Ошибка: Файл {file_path} не найден")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Ошибка при чтении файла: {e}")
+        sys.exit(1)
+
 def main():
-    print("Программа для подсчета частей речи в тексте")
-    print("Пока не реализовано чтение из файла")
+    if len(sys.argv) != 2:
+        print("Использование: python main.py <путь_к_файлу>")
+        sys.exit(1)
+        
+    file_path = sys.argv[1]
+    text = read_file(file_path)
+    
+    results = count_pos_tags(text)
+    
+    print(f"Статистика частей речи в тексте:")
+    print(f"Прилагательных: {results['adjectives']}")
+    print(f"Наречий: {results['adverbs']}")
+    print(f"Глаголов: {results['verbs']}")
 
 if __name__ == "__main__":
     main()
