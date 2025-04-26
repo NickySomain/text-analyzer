@@ -63,6 +63,7 @@ def main():
     print(f"Прилагательных: {results['adjectives']}")
     print(f"Наречий: {results['adverbs']}")
     print(f"Глаголов: {results['verbs']}")
+    print(f"Всего проанализировано частей речи: {sum(results.values())}")
 
 if __name__ == "__main__":
     main()
