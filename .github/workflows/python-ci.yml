@@ -23,9 +23,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run unit tests
+    - name: Run unit tests with coverage
       run: |
-        python -m unittest test_main.py
+        coverage run --source=main -m unittest test_main.py
+        coverage report
 
     - name: Test script with sample text
       run: |
